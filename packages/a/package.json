@@ -1,0 +1,13 @@
+{
+  "name": "a",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo running test for package a",
+    "build": "tsc"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
