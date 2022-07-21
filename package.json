@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "diff:a": "git diff --quiet HEAD origin/master -- packages/a",
-    "diff:b": "git diff --quiet HEAD origin/master -- packages/b"
+    "diff:a": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/a",
+    "diff:b": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/b"
   },
   "keywords": [],
   "author": "",
