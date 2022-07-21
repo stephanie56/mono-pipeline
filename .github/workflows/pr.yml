@@ -16,14 +16,21 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+      - name: Get Diff
+        id: get-diff
+        run: |
+          npm run diff:a || echo "::set-output name=packageAChanged::true"
+          npm run diff:b || echo "::set-output name=packageBChanged::true"
       - name: Clean install dependencies and build in package a
         working-directory: ./packages/a
+        if: '${{ steps.get-diff.outputs.packageAChanged }}'
         run: |
           npm ci
           npm run build
           npm test
       - name: Clean install dependencies and build in package b
         working-directory: ./packages/b
+        if: '${{ steps.get-diff.outputs.packageBChanged }}'
         run: |
           npm ci
           npm run build
