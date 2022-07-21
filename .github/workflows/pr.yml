@@ -7,33 +7,16 @@ on:
     branches: ['master']
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Use Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - name: Get Diff
-        id: get-diff
-        run: |
-          npm run diff:a || echo "::set-output name=packageAChanged::true"
-          npm run diff:b || echo "::set-output name=packageBChanged::true"
-      - name: Clean install dependencies and build in package a
-        working-directory: ./packages/a
-        if: '${{ steps.get-diff.outputs.packageAChanged }}'
-        run: |
-          npm ci
-          npm run build
-          npm test
-      - name: Clean install dependencies and build in package b
-        working-directory: ./packages/b
-        if: '${{ steps.get-diff.outputs.packageBChanged }}'
-        run: |
-          npm ci
-          npm run build
-          npm test
+  build_a:
+    name: Build Package A
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: a
+      package_path: ./packages/a
+  build_b:
+    needs: build_a
+    name: Build Package B
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: b
+      package_path: ./packages/b
