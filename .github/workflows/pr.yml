@@ -1,0 +1,37 @@
+name: Package PR Pipeline
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Get Diff
+        id: get-diff
+        run: |
+          npm run diff:a || echo "::set-output name=packageAChanged::true"
+          npm run diff:b || echo "::set-output name=packageBChanged::true"
+      - name: Clean install dependencies and build in package a
+        working-directory: ./packages/a
+        if: '${{ steps.get-diff.outputs.packageAChanged }}'
+        run: |
+          npm ci
+          npm run build
+          npm test
+      - name: Clean install dependencies and build in package b
+        working-directory: ./packages/b
+        if: '${{ steps.get-diff.outputs.packageBChanged }}'
+        run: |
+          npm ci
+          npm run build
+          npm test
