@@ -1,0 +1,30 @@
+name: Package Release Pipeline
+
+on:
+  workflow_dispatch:
+#   push:
+#     branches: ['master']
+
+jobs:
+  build_a:
+    name: Build Package A
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: a
+      package_path: ./packages/a
+  build_b:
+    needs: build_a
+    name: Build Package B
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: b
+      package_path: ./packages/b
+  # job_3:
+  #   needs: [build_a, build_b]
+  #   - name: Get Diff
+  #     id: get-diff
+  #     run: |
+  #       npm run diff:a || echo "::set-output name=hasAChange::true"
+  #       npm run diff:b || echo "::set-output name=hasBChange::true"
+  # - run: |
+  #     npm version patch -w a

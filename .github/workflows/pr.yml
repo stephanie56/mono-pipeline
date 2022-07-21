@@ -1,8 +1,6 @@
 name: Package PR Pipeline
 
 on:
-  push:
-    branches: ['master']
   pull_request:
     branches: ['master']
 
