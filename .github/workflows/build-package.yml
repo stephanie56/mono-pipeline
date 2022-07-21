@@ -25,11 +25,29 @@ jobs:
       - name: Get Diff
         id: get-diff
         run: |
+          npm run diff:a || echo "::set-output name=hasAChange::true"
+          npm run diff:b || echo "::set-output name=hasBChange::true"
           npm run diff:${{ inputs.package_name }} || echo "::set-output name=hasChange::true"
+      - uses: actions/download-artifact@v3
+        if: ${{ inputs.package_name != 'a' && steps.get-diff.outputs.hasAChange }}
+        with:
+          name: dist
+          path: ./packages/a
+      - uses: actions/download-artifact@v3
+        if: ${{ inputs.package_name != 'a' && inputs.package_name != 'b' && steps.get-diff.outputs.hasBChange }}
+        with:
+          name: dist
+          path: packages/b
       - name: Clean install dependencies and build in package ${{ inputs.package_name }}
         working-directory: ${{ inputs.package_path }}
-        if: '${{ steps.get-diff.outputs.hasChange }}'
+        if: ${{ steps.get-diff.outputs.hasChange }}
         run: |
           npm ci
           npm run build
           npm test
+      - uses: actions/upload-artifact@v3
+        if: ${{ inputs.package_name != 'b' }}
+        with:
+          retention-days: 1
+          name: dist
+          path: ${{ inputs.package_path }}/dist
