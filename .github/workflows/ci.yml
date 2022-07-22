@@ -1,9 +1,12 @@
 name: Package Release Pipeline
 
+# on:
+#   release:
+#     types: [created]
+
 on:
-  workflow_dispatch:
-#   push:
-#     branches: ['master']
+  pull_request:
+    branches: ['master']
 
 jobs:
   build_a:
@@ -12,6 +15,7 @@ jobs:
     with:
       package_name: a
       package_path: ./packages/a
+
   build_b:
     needs: build_a
     name: Build Package B
@@ -19,12 +23,25 @@ jobs:
     with:
       package_name: b
       package_path: ./packages/b
-  # job_3:
-  #   needs: [build_a, build_b]
-  #   - name: Get Diff
-  #     id: get-diff
-  #     run: |
-  #       npm run diff:a || echo "::set-output name=hasAChange::true"
-  #       npm run diff:b || echo "::set-output name=hasBChange::true"
-  # - run: |
-  #     npm version patch -w a
+
+  publish-npm:
+    needs: [build_a, build_b]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: ./packages/a
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: ./packages/b
+      - run: npm version patch -w a -m -m "Upgrade to %s for ci [skip ci]"
+      - name: 'Push version to package.json'
+        run: git push origin HEAD:refs/heads/master -f
