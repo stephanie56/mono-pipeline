@@ -1,7 +1,12 @@
 name: Release Pipeline using Composite Action Templates
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+# on:
+#   workflow_dispatch:
 
 jobs:
   build:
@@ -56,7 +61,10 @@ jobs:
           package_name: b
           package_path: ./packages/b
       - name: Push version changes to git repo
+        if: ${{ steps.get-diff.outputs.hasAChange || steps.get-diff.outputs.hasBChange }}
         run: |
+          git config user.email "stephanie.zeng@rangle.io"
+          git config user.name "Stephanie Zeng"
           git add .
           git commit -m "Update package versions [skip ci]"
           git fetch origin master
