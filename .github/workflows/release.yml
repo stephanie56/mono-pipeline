@@ -49,19 +49,19 @@ jobs:
           package_name: b
           package_path: ./packages/b
       - name: Publish Package A
-        if: ${{ steps.get-diff.outputs.hasAChange }}
+        # if: ${{ steps.get-diff.outputs.hasAChange }}
         uses: ./actions/release-package
         with:
           package_name: a
           package_path: ./packages/a
       - name: Publish Package B
-        if: ${{ steps.get-diff.outputs.hasBChange }}
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
         uses: ./actions/release-package
         with:
           package_name: b
           package_path: ./packages/b
       - name: Push version changes to git repo
-        if: ${{ steps.get-diff.outputs.hasAChange || steps.get-diff.outputs.hasBChange }}
+        # if: ${{ steps.get-diff.outputs.hasAChange || steps.get-diff.outputs.hasBChange }}
         run: |
           git config user.email "stephanie.zeng@rangle.io"
           git config user.name "Stephanie Zeng"
