@@ -26,7 +26,7 @@ jobs:
           npm run diff:a || echo "::set-output name=hasAChange::true"
           npm run diff:b || echo "::set-output name=hasBChange::true"
       - name: Run CI for Package A
-        if: ${{ steps.get-diff.outputs.hasAChange }}
+        # if: ${{ steps.get-diff.outputs.hasAChange }}
         id: ci_a
         ## Use github composite action defined in the `actions` folder
         ## This template allows us to create reusable steps that can be nested in the same job
@@ -42,7 +42,7 @@ jobs:
           package_name: a
           package_path: ./packages/a
       - name: Run CI for Package B
-        if: ${{ steps.get-diff.outputs.hasBChange }}
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
         id: ci_b
         uses: ./actions/full-ci
         with:
