@@ -6,6 +6,6 @@ export const addTwo = (num: number) => {
     return (num + 2);
 }
 
-// test
+// test again
 
 export default addTwo;
