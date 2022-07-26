@@ -1,0 +1,26 @@
+name: Package PR Pipeline using Reusable Workflow Approach
+
+# on:
+#   pull_request:
+#     branches: ['master']
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_a:
+    name: Build Package A
+    ## Use github reusable workflow defined in the same `.github/workflows` folder
+    ## This template allows us to create reusable steps to make a separate job
+    ## Need to use upload artifact to pass build `dist` folder between jobs
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: a
+      package_path: ./packages/a
+  build_b:
+    needs: build_a
+    name: Build Package B
+    uses: ./.github/workflows/build-package.yml
+    with:
+      package_name: b
+      package_path: ./packages/b
