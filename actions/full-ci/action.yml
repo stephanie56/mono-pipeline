@@ -1,0 +1,26 @@
+name: 'Run CI for Package'
+description: 'Run CI for Foundation'
+inputs:
+  package_name:
+    required: true
+    type: string
+  package_path:
+    required: true
+    type: string
+runs:
+  using: 'composite'
+  steps:
+    - name: Clean install dependencies and build in package ${{ inputs.package_name }}
+      working-directory: ${{ inputs.package_path }}
+      run: |
+        npm ci
+        npm run build
+      shell: bash
+    - name: Run Unit Tests for ${{ inputs.package_name }}
+      working-directory: ${{ inputs.package_path }}
+      run: npm run test
+      shell: bash
+    - name: Build Storybook for ${{ inputs.package_name }}
+      working-directory: ${{ inputs.package_path }}
+      run: echo building storybook for ${{ inputs.package_name }}
+      shell: bash

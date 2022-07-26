@@ -4,9 +4,12 @@ name: Package Release Pipeline
 #   release:
 #     types: [created]
 
+# on:
+#   pull_request:
+#     branches: ['master']
+
 on:
-  pull_request:
-    branches: ['master']
+  workflow_dispatch:
 
 jobs:
   build_a:

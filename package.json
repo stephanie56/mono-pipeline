@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "diff:a": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/a",
     "diff:b": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/b"
   },
