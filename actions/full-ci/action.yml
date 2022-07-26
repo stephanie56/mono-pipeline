@@ -12,10 +12,10 @@ runs:
   steps:
     ## We can also nest composite actions - meaning call another composite action inside a composite action
     - name: Clean install dependencies and build in package ${{ inputs.package_name }}
-    uses: ./actions/build-package
-    with:
-      package_name: ${{ inputs.package_name }}
-      package_path: ${{ inputs.package_path }}
+      uses: ./actions/build-package
+      with:
+        package_name: ${{ inputs.package_name }}
+        package_path: ${{ inputs.package_path }}
     - name: Run Unit Tests for ${{ inputs.package_name }}
       working-directory: ${{ inputs.package_path }}
       run: npm run test
