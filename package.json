@@ -12,7 +12,7 @@
     "bump:a": "npm run diff:a || npm version patch -w @stephaniez_rangle/a",
     "bump:b": "npm run diff:b || npm version patch -w @stephaniez_rangle/b",
     "publish:a": "npm run diff:a || npm publish -w @stephaniez_rangle/a --access public",
-    "publish:b": "npm run diff:b || npm publish -w @stephaniez_rangle/b --access public"
+    "publish:b": "npm run diff:b || npm install @stephaniez_rangle/a@latest -w @stephaniez_rangle/b && npm publish -w @stephaniez_rangle/b --access public"
   },
   "keywords": [],
   "author": "",
