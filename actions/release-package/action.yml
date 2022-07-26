@@ -13,6 +13,8 @@ runs:
     - name: Bump up version for ${{ inputs.package_name }}
       run: npm run bump:${{ inputs.package_name }}
       shell: bash
-    - name: Publish package ${{ inputs.package_name }} to NPM
-      run: npm run publish:${{ inputs.package_name }}
-      shell: bash
+
+    # TODO: npm adduser login
+    # - name: Publish package ${{ inputs.package_name }} to NPM
+    #   run: npm run publish:${{ inputs.package_name }}
+    #   shell: bash

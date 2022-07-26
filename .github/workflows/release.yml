@@ -1,5 +1,10 @@
 name: Release Pipeline using Composite Action Templates
 
+# on:
+#   push:
+#     branches:
+#       - master
+
 on:
   workflow_dispatch:
 
@@ -21,7 +26,7 @@ jobs:
           npm run diff:a || echo "::set-output name=hasAChange::true"
           npm run diff:b || echo "::set-output name=hasBChange::true"
       - name: Run CI for Package A
-        if: ${{ steps.get-diff.outputs.hasAChange }}
+        # if: ${{ steps.get-diff.outputs.hasAChange }}
         id: ci_a
         ## Use github composite action defined in the `actions` folder
         ## This template allows us to create reusable steps that can be nested in the same job
@@ -37,26 +42,30 @@ jobs:
           package_name: a
           package_path: ./packages/a
       - name: Run CI for Package B
-        if: ${{ steps.get-diff.outputs.hasBChange }}
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
         id: ci_b
         uses: ./actions/full-ci
         with:
           package_name: b
           package_path: ./packages/b
       - name: Publish Package A
-        if: ${{ steps.get-diff.outputs.hasAChange }}
+        # if: ${{ steps.get-diff.outputs.hasAChange }}
         uses: ./actions/release-package
         with:
           package_name: a
           package_path: ./packages/a
       - name: Publish Package B
-        if: ${{ steps.get-diff.outputs.hasBChange }}
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
         uses: ./actions/release-package
         with:
           package_name: b
           package_path: ./packages/b
+      ## Compare master and the last release tag git diff
       - name: Push version changes to git repo
+        # if: ${{ steps.get-diff.outputs.hasAChange || steps.get-diff.outputs.hasBChange }}
         run: |
+          git config user.email "stephanie.zeng@rangle.io"
+          git config user.name "Stephanie Zeng"
           git add .
           git commit -m "Update package versions [skip ci]"
           git fetch origin master
