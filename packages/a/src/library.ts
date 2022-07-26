@@ -1,5 +1,5 @@
-export const addOne = (num: number) => {
+export const addTwo = (num: number) => {
     return (num + 1);
 }
 
-export default addOne;
+export default addTwo;

@@ -1,1 +1,1 @@
-export { addTwo } from "./library";
+export { addThree } from "./library";

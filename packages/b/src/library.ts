@@ -1,9 +1,9 @@
-import { addOne } from '@stephaniez_rangle/a';
+import { addTwo } from '@stephaniez_rangle/a';
 
-export const addTwo = (num: number) => {
-    const addOneCal = addOne(1);
+export const addThree = (num: number) => {
+    const addOneCal = addTwo(1);
     console.log(`result from addOne is ${addOneCal}`);
     return (num + 2);
 }
 
-export default addTwo;
+export default addThree;
