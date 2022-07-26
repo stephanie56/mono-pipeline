@@ -42,6 +42,8 @@ jobs:
         with:
           name: dist
           path: ./packages/b
-      - run: npm version patch -w a -m -m "Upgrade to %s for ci [skip ci]"
+      - run: npm version patch -w a
+      - run: git add .
+      - run: git commit -m "Upgrade for ci [skip ci]"
       - name: 'Push version to package.json'
         run: git push origin HEAD:refs/heads/master -f
