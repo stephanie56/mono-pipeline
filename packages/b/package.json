@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A description of your project",
   "main": "dist/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "echo running test for package b",
     "build": "tsc"

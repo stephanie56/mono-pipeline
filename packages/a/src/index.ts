@@ -1,2 +1,2 @@
-export { addOneAgain } from "./library";
+export { addOne } from "./library";
 // test
