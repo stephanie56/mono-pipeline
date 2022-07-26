@@ -1,6 +1,6 @@
 {
-  "name": "a",
-  "version": "0.0.1",
+  "name": "@stephaniez_rangle/a",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
