@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "diff:a": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/a",
-    "diff:b": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/b"
+    "diff:b": "git diff --quiet `git merge-base origin/master HEAD`..HEAD -- packages/b",
+    "build:a": "npm run build -w @stephaniez_rangle/a",
+    "build:b": "npm run build -w @stephaniez_rangle/b"
   },
   "keywords": [],
   "author": "",

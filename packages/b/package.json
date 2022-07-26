@@ -1,5 +1,5 @@
 {
-  "name": "b",
+  "name": "@stephaniez_rangle/b",
   "version": "0.0.1",
   "description": "A description of your project",
   "main": "dist/index.js",
@@ -11,6 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.2.4",
-    "a": "0.0.1"
+    "@stephaniez_rangle/a": "0.0.1"
   }
 }

@@ -1,4 +1,4 @@
-import { addOne } from 'a';
+import { addOne } from '@stephaniez_rangle/a';
 
 export const addTwo = (num: number) => {
     const addOneCal = addOne(1);
