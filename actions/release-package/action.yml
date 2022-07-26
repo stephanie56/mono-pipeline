@@ -1,0 +1,18 @@
+name: 'Publish Package'
+description: 'Bump up package version and publish to npm'
+inputs:
+  package_name:
+    required: true
+    type: string
+  package_path:
+    required: true
+    type: string
+runs:
+  using: 'composite'
+  steps:
+    - name: Bump up version for ${{ inputs.package_name }}
+      run: npm run bump:${{ inputs.package_name }}
+      shell: bash
+    - name: Publish package ${{ inputs.package_name }} to NPM
+      run: npm run publish:${{ inputs.package_name }}
+      shell: bash

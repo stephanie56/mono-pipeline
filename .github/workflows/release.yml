@@ -43,3 +43,21 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
+      - name: Publish Package A
+        if: ${{ steps.get-diff.outputs.hasAChange }}
+        uses: ./actions/release-package
+        with:
+          package_name: a
+          package_path: ./packages/a
+      - name: Publish Package B
+        if: ${{ steps.get-diff.outputs.hasBChange }}
+        uses: ./actions/release-package
+        with:
+          package_name: b
+          package_path: ./packages/b
+      - name: Push version changes to git repo
+        run: |
+          git add .
+          git commit -m "Update package versions [skip ci]"
+          git fetch origin master
+          git push origin HEAD:master
