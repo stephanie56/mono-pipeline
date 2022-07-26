@@ -10,6 +10,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    ## We can also nest composite actions - meaning call another composite action inside a composite action
     - name: Clean install dependencies and build in package ${{ inputs.package_name }}
     uses: ./actions/build-package
     with:
