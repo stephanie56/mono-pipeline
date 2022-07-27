@@ -57,8 +57,8 @@ jobs:
         with:
           package_name: a
           package_path: ./packages/a
-          # npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
       - name: Publish package A to NPM
+        id: publish_a
         working-directory: ./packages/a
         # if: ${{ steps.get-diff.outputs.hasAChange }}
         run: npm publish --access public
@@ -70,8 +70,8 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
-          # npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
       - name: Publish package B to NPM
+        needs: [publish_a]
         # if: ${{ steps.get-diff.outputs.hasBChange }}
         working-directory: ./packages/b
         run: npm install @stephaniez_rangle/a@latest && npm publish --access public
