@@ -1,0 +1,19 @@
+name: 'Update Package Version'
+description: 'Point to the updated version of the depending package'
+inputs:
+  package_name:
+    required: true
+    type: string
+  package_path:
+    required: true
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Read the updated version from package ${{ inputs.package_name }}
+      run: |
+        version=$(grep version ${{ inputs.package_path }}/package.json | awk -F \" '{print $4}')
+        echo version: $version
+        echo ::set-output name=version::$version
+      shell: bash
