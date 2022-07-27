@@ -1,4 +1,4 @@
-name: PR Pipeline using Composite Action Templates
+name: PR (Composite Action)
 
 on:
   pull_request:

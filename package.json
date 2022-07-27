@@ -10,9 +10,7 @@
     "build:a": "npm run build -w @stephaniez_rangle/a",
     "build:b": "npm run build -w @stephaniez_rangle/b",
     "bump:a": "npm version patch -w @stephaniez_rangle/a",
-    "bump:b": "npm version patch -w @stephaniez_rangle/b",
-    "publish:a": "npm publish -w @stephaniez_rangle/a --access public",
-    "publish:b": "npm install @stephaniez_rangle/a@latest -w @stephaniez_rangle/b && npm publish -w @stephaniez_rangle/b --access public"
+    "bump:b": "npm version patch -w @stephaniez_rangle/b"
   },
   "keywords": [],
   "author": "",

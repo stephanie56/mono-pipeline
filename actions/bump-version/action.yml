@@ -1,0 +1,16 @@
+name: 'Bump Up Package Version'
+description: 'Bump up package version'
+inputs:
+  package_name:
+    required: true
+    type: string
+  package_path:
+    required: true
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Bump up version for ${{ inputs.package_name }}
+      run: npm run bump:${{ inputs.package_name }}
+      shell: bash

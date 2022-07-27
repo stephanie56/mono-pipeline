@@ -1,4 +1,4 @@
-name: Package PR Pipeline using Reusable Workflow Approach
+name: PR (Reusable Workflow Approach)
 
 # on:
 #   pull_request:
