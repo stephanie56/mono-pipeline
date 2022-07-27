@@ -7,8 +7,6 @@ inputs:
   package_path:
     required: true
     type: string
-  npm_token:
-    required: true
 
 runs:
   using: 'composite'
@@ -16,3 +14,8 @@ runs:
     - name: Bump up version for ${{ inputs.package_name }}
       run: npm run bump:${{ inputs.package_name }}
       shell: bash
+    # - name: Publish package ${{ inputs.package_name }} to NPM
+    #   shell: bash
+    #   run: npm run publish:${{ inputs.package_name }}
+    #   env:
+    #     NODE_AUTH_TOKEN: ${{ inputs.npm_token }}

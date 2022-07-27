@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
           # Defaults to the user or organization that owns the workflow file
           scope: '@stephaniez_rangle'
@@ -51,20 +51,32 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
-      - name: Publish Package A
+      - name: Bump Up Version for Package A
         # if: ${{ steps.get-diff.outputs.hasAChange }}
         uses: ./actions/release-package
         with:
           package_name: a
           package_path: ./packages/a
-          npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
-      - name: Publish Package B
+          # npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
+      - name: Publish package A to NPM
+        working-directory: ./packages/a
+        # if: ${{ steps.get-diff.outputs.hasAChange }}
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
+      - name: Bump Up Version for Package B
         # if: ${{ steps.get-diff.outputs.hasBChange }}
         uses: ./actions/release-package
         with:
           package_name: b
           package_path: ./packages/b
-          npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
+          # npm_token: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
+      - name: Publish package B to NPM
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
+        working-directory: ./packages/b
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
       ## Compare master and the last release tag git diff
       - name: Push version changes to git repo
         # if: ${{ steps.get-diff.outputs.hasAChange || steps.get-diff.outputs.hasBChange }}

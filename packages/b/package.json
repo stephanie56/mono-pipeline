@@ -1,6 +1,6 @@
 {
   "name": "@stephaniez_rangle/b",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A description of your project",
   "main": "dist/index.js",
   "types": "dist/src/index.d.ts",
@@ -10,7 +10,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@stephaniez_rangle/a": "^0.0.2",
+    "@stephaniez_rangle/a": "^0.0.4",
     "typescript": "^4.2.4"
   }
 }
