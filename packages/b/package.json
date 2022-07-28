@@ -1,6 +1,6 @@
 {
   "name": "@stephaniez_rangle/b",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A description of your project",
   "main": "dist/index.js",
   "types": "dist/src/index.d.ts",
