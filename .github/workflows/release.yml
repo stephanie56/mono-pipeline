@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  # workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -25,8 +25,8 @@ jobs:
         id: get-diff
         run: |
           echo current branch is ${{ github.ref_name }} 
-          npm run diff:a || echo "::set-output name=hasAChange::true"
-          npm run diff:b || echo "::set-output name=hasBChange::true"
+          npm run diff-master:a || echo "::set-output name=hasAChange::true"
+          npm run diff-master:b || echo "::set-output name=hasBChange::true"
       - name: Run CI for Package A
         if: ${{ steps.get-diff.outputs.hasAChange }}
         id: ci_a
