@@ -70,8 +70,8 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
-      - name: Sleep for 5 seconds
-        run: sleep 5s
+      - name: Sleep for 8 seconds
+        run: sleep 8s
         shell: bash
       - name: Check current package A version
         id: curr_package_ver
