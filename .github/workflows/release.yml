@@ -70,10 +70,17 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
+      - name: Sleep for 60 seconds
+        run: sleep 60s
+        shell: bash
+      - name: Try to install the latest Package A
+        # if: ${{ steps.get-diff.outputs.hasBChange }}
+        working-directory: ./packages/b
+        run: npm install @stephaniez_rangle/a@latest
       - name: Publish package B to NPM
         # if: ${{ steps.get-diff.outputs.hasBChange }}
         working-directory: ./packages/b
-        run: npm publish --access public
+        run: npm install  &&npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
       ## Compare master and the last release tag git diff
