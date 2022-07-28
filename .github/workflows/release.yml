@@ -70,8 +70,8 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
-      - name: Sleep for 60 seconds
-        run: sleep 60s
+      - name: Sleep for 1 seconds
+        run: sleep 1s
         shell: bash
       - name: Try to install the latest Package A
         # if: ${{ steps.get-diff.outputs.hasBChange }}
