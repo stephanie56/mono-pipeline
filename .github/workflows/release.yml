@@ -70,16 +70,22 @@ jobs:
         with:
           package_name: b
           package_path: ./packages/b
-      - name: Sleep for 10 seconds
-        run: sleep 10s
+      - name: Sleep for 5 seconds
+        run: sleep 5s
         shell: bash
-      - name: Check if the latest version of Package A is already updated
+      - name: Check current package A version
+        id: curr_package_ver
+        working-directory: ./packages/b
         run: |
-          version=$(grep version ${{ inputs.package_path }}/package.json | awk -F \" '{print $4}')
+          version=$(grep version package.json | awk -F \" '{print $4}')
           echo current package a version: $version
           echo ::set-output name=currentVersion::$version
       - name: Check latest
+        id: latest_package_ver
         run: echo ::set-output name=latestVersion::$(npm view @stephaniez_rangle/a version)
+      - name: Match Version
+        if: ${{ steps.curr_package_ver.outputs.currentVersion == steps.latest_package_ver.outputs.latestVersion }}
+        run: echo matching latest version
       - name: Try to install the latest Package A
         # if: ${{ steps.get-diff.outputs.hasBChange }}
         working-directory: ./packages/b
