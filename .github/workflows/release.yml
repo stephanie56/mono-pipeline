@@ -24,9 +24,8 @@ jobs:
       - name: Get Diff
         id: get-diff
         run: |
-          echo current branch is ${{ github.ref_name }} 
-          npm run diff-master:a || echo "::set-output name=hasAChange::true"
-          npm run diff-master:b || echo "::set-output name=hasBChange::true"
+          git diff HEAD^ HEAD -- packages/a || echo "::set-output name=hasAChange::true"
+          git diff HEAD^ HEAD -- packages/b || echo "::set-output name=hasBChange::true"
       - name: Run CI for Package A
         if: ${{ steps.get-diff.outputs.hasAChange }}
         id: ci_a
