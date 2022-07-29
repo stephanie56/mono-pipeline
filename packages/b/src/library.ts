@@ -1,7 +1,7 @@
-import { addOne } from '@stephaniez_rangle/a';
+import { addOneAgain } from '@stephaniez_rangle/a';
 
 export const addTwo = (num: number) => {
-    const addOneCal = addOne(1);
+    const addOneCal = addOneAgain(1);
     console.log(`result from addOne is ${addOneCal}`);
     return (num + 2);
 }
