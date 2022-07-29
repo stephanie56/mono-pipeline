@@ -68,11 +68,11 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGE_TOKEN }}
-      - name: Wait 10 Secs and Install the latest Package A
+      - name: Wait 30 Secs and Install the latest Package A
         if: ${{ steps.get-diff.outputs.hasAChange && steps.get-diff.outputs.hasBChange }}
         working-directory: ./packages/b
         run: |
-          sleep 10s
+          sleep 30s
           npm install @stephaniez_rangle/a@latest
       - name: Publish package B to NPM
         if: ${{ steps.get-diff.outputs.hasBChange }}
