@@ -1,6 +1,6 @@
-# Everest Monorepo Pipeline POC
+# Monorepo Pipeline POC
 
-This repository provides an example of how the Everest monorepo PR and release pipeline can be set up with one single pipeline.
+This repository provides an example of how an monorepo PR and release pipeline can be set up with one single pipeline.
 
 This repository also demonstrates:
 
